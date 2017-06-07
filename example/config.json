@@ -1,0 +1,24 @@
+[  
+   {  
+      "name":"hello",
+      "path":"/",
+      "response":"hello world!"
+   },
+   {  
+      "name":"myapi",
+      "path":"/api",
+      "response":{  
+         "version":1,
+         "status":"api working"
+      }
+   },
+   {  
+      "name":"myapiusers",
+      "path":"/api/users",
+      "response":[  
+         "john",
+         "david",
+         "peter"
+      ]
+   }
+]
