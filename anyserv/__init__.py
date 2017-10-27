@@ -1,14 +1,18 @@
+import six
 import json
 import argparse
-
 from flask import Flask
 from flask import jsonify
-from schema import Schema, And, Or, SchemaUnexpectedTypeError, SchemaError
+from schema import Schema, And, Or, SchemaUnexpectedTypeError, SchemaError, Optional
 
 app = Flask(__name__)
 
-schema = Schema([{'name' : And(str, len), 'path': And(str), 'response': Or(str,list,dict,int,bool)}])
+if six.PY3:
+    _basestr = str
+else:
+    _basestr = basestring
 
+schema = Schema([{'name' : And(_basestr, len), 'path': And(_basestr), 'response': Or(_basestr,list,dict,int,bool), Optional('method'): And(_basestr)}])
 
 def formatter(data):
     if isinstance(data, str):
@@ -22,8 +26,13 @@ def gen_func(data):
     return inner
     
 def add_app(dct):
+    method = dct.get("method", ["GET"])
+    if not isinstance(method, list):
+        method = [method.upper()]
+    else:
+        method = [method.upper() for method in method]
     name, path, data = dct['name'], dct['path'], dct['response']
-    app.add_url_rule(path, name, gen_func(data))
+    app.add_url_rule(path, name, gen_func(data), methods=method)
 
 def register(jsonData):
     data = jsonData
@@ -57,7 +66,6 @@ class StoreJson(argparse.Action):
                                  help=help,
                                  metavar=metavar,
                                  )
-        return
 
     def __call__(self, parser, namespace, values,
                  option_string=None):
