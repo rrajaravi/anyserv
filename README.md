@@ -29,30 +29,32 @@ Get a full (GET request as of now) fake REST API with zero coding
          
 #### Sample Config File
 
-        [  
-           {  
-              "name":"hello",
-              "path":"/",
-              "response":"hello world!"
-           },
-           {  
-              "name":"myapi",
-              "path":"/api",
-              "response":{  
-                 "version":1,
-                 "status":"api working"
-              }
-           },
-           {  
-              "name":"myapiusers",
-              "path":"/api/users",
-              "response":[  
-                 "john",
-                 "david",
-                 "peter"
-              ]
-           }
-        ]
-
+		[  
+		   {  
+		      "name":"hello",
+		      "path":"/",
+		      "method": "GET",
+		      "response":"hello world!"
+		   },
+		   {  
+		      "name":"myapi",
+		      "path":"/api",
+		      "method": "GET",
+		      "response":{  
+		         "version":1,
+		         "status":"api working"
+		      }
+		   },
+		   {  
+		      "name":"myapiusers",
+		      "path":"/api/users",
+		      "method": "GET",
+		      "response":[  
+		         "john",
+		         "david",
+		         "peter"
+		      ]
+		   }
+		]
 ## License
 MIT
