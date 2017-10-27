@@ -70,16 +70,15 @@ class StoreJson(argparse.Action):
     def __call__(self, parser, namespace, values,
                  option_string=None):
         # Do some arbitrary processing of the input values
+        data = []
         with open(values, 'r') as f:
             try:
-                data = json.load(f)
+                data = json.load(f) 
                 schema.validate(data)
             except (SchemaUnexpectedTypeError, SchemaError) as e:
-                print(e)
                 raise SchemaError("Incompaible JSON data format: " + str(values))
-            except Exception:
+            except Exception as e:
                 raise argparse.ArgumentTypeError("Not a valid json file: " + str(values))
-                
         # Save the results in the namespace using the destination
         # variable given to our constructor.
         setattr(namespace, self.dest, data)

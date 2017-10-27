@@ -2,11 +2,13 @@
    {  
       "name":"hello",
       "path":"/",
+      "method": "GET",
       "response":"hello world!"
    },
    {  
       "name":"myapi",
       "path":"/api",
+      "method": "GET",
       "response":{  
          "version":1,
          "status":"api working"
@@ -15,6 +17,7 @@
    {  
       "name":"myapiusers",
       "path":"/api/users",
+      "method": "GET",
       "response":[  
          "john",
          "david",
