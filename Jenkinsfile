@@ -6,5 +6,13 @@ pipeline {
                 sh 'python --version'
             }
         }
+        stage('package') {
+            steps {
+                sh '''
+                echo $PWD
+                ls -ltrh
+                '''
+            }
+        }
     }
 }
